@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<my-header></my-header>
+	</div>
+
+	<!-- <template id="temp1">
+		<div>
+			<h2>title</h2>
+			<ul>
+				<li>111</li>
+				<li>222</li>
+			</ul>
+		</div>
+	</template> -->
+
+	<script id="temp1" type="text/x-template">
+		<div>
+			<h2>title</h2>
+			<ul>
+				<li>111</li>
+				<li>222</li>
+			</ul>
+		</div>
+	</script>
+	
+
+	<script>
+
+	var vm = new Vue({
+		el : '#app',
+		components : {
+			'my-header' : {
+				/*template : '<div>\
+								<h2>title</h2>\
+								<ul>\
+									<li>111</li>\
+									<li>222</li>\
+								</ul>\
+							</div>',*/
+				/*template : `<div>
+								<h2>title</h2>
+								<ul>
+									<li>111</li>
+									<li>222</li>
+								</ul>
+							</div>`,*/
+				template : '#temp1',
+				data(){
+					return {
+						
+					};
+				},
+				methods : {
+					
+				}
+			}
+		}
+	});
+
+
+	</script>
+</body>
+</html>
