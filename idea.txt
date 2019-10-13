@@ -1,0 +1,16 @@
+1、ssh本地地址：C:\Users\wqy\.ssh
+2、生成ssh密钥：$ ssh-keygen -t rsa -C "your_email@youremail.com"
+3、检验ssh链接：ssh -T git@github.com
+4、设定连接github的用户名与密码：
+（name最好和GitHub上边的一样，email是一定要是注册GitHub的那个邮箱地址）
+	git config --global user.name "yourname"
+	git config --global user.email "your_email@youremail.com"
+5、克隆到本地的库：
+	(1)、定位D：cd /D（含空格）
+	(2)、git clone https://github.com/Imean96/baseCode.git
+6、上传文件：
+	(1)、定位库的文件夹：cd /D/baseCode
+	(2)、查看文件：ls
+	(3)、git add test.txt
+	(4)、git commit -m "cc"  cc:注释内容
+	(5)、git push origin master  然后输入username与password
