@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+/* 		.fade-enter{ opacity : 0; }
+.fade-enter-to{ opacity : 1; }
+.fade-enter-active{ transition :5s; }
+.fade-leave{ opacity : 1; }
+.fade-leave-to{ opacity : 0; }
+.fade-leave-active{ transition :5s; } */
+		.fade-enter,.fade-leave-to{ opacity: 0; }
+		.fade-enter-active,.fade-leave-active{ transition :5s; }
+
+		.slide-enter-active{
+			animation : 2s move linear;
+		}
+		.slide-leave-active{
+			animation : 2s move linear reverse;
+		} 
+		@keyframes move{
+			0%{
+				transform : translateX(100px);
+				opacity : 0;
+			}
+			100%{
+				transform : translateX(0px);
+				opacity : 1;
+			}
+		}
+	</style>
+	<script src="vue.js"></script>
+</head>
+<body>
+	
+	<div id="app">
+		<button @click="handleChange">切换</button>
+		<!-- <transition name="fade">
+				<div v-if="isShow">aaaaa</div>
+			</transition> -->	
+		<transition name="slide">
+			<div v-if="isShow" style="position:absolute;">aaaaa</div>
+		</transition>
+	</div>
+	<script>
+		
+	//1、vue动画主要是针对于元素或组件的显示隐藏操作
+	//2、<transition>标签来实现动画和过渡,以下都属于内置的组件
+		//<template>
+		//<component>
+		//<keep-alive>
+		//<slot>
+	
+	var vm = new Vue({
+		el : '#app',
+		data : {
+			isShow : true
+		},
+		methods : {
+			handleChange(){
+				this.isShow = !this.isShow;
+			}
+		}
+	});
+
+	</script>
+</body>
+</html>
