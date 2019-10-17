@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">	
+	<title>Document</title>
+	<style>
+		*{ margin:0; padding:0; } 
+		li{ list-style: none; }
+		img{ display: block; }
+		#app{ height:2000px; }
+		#app .header{ height:45px; background:#00b38a; color:white; font-size:20px; text-align:center; line-height:45px; position:relative; width: 100%;}
+		#app .iconleft{ position: absolute; left:3px; font-size: 20px;}
+		#app .iconright{ position: absolute; right:3px;  font-size: 20px;}
+	</style>
+	<link rel="stylesheet" href="iconfont/iconfont.css">
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<!-- <lagou-header title="拉勾网" fixed>
+		</lagou-header> -->
+		<!-- <br> -->
+		<lagou-header title="职位详情" fixed>
+			<i slot="iconleft" class="iconleft iconfont iconarrowleft"></i>
+			<i slot="iconright" @touchstart="homeBack" class="iconright iconfont iconhome"></i>
+		</lagou-header>
+		<!-- <br>
+		<lagou-header>
+		</lagou-header> -->
+	</div>
+
+	<script>
+		
+		//css3 @font-face文字图标 iconfont.cn
+		//props 默认值
+		
+		var vm = new Vue({
+			el : '#app',
+			components : {
+				'lagou-header' : {
+					template : `
+						<div class="header" :style=" { position : fixed ? 'fixed' : 'static'  } ">
+							<slot name="iconleft"></slot>
+							{{ title }}
+							<slot name="iconright"></slot>	
+						</div>	
+						`,
+					//props : ['title']
+					props : {
+						title : {
+							default : '默认的头部信息',
+							type : String
+						},
+						fixed : {
+							default : false,
+							type : Boolean
+						}
+					}
+				}
+			},
+			methods : {
+				homeBack(){
+					window.location.href = "http://www.baidu.com";
+				}
+			}
+		});
+
+	</script>
+</body>
+</html>

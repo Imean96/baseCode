@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<my-ul>
+			<my-li>
+			</my-li>
+		</my-ul>
+	</div>
+
+	<script>
+		
+		var vm = new Vue({
+			el : '#app',
+			components : {
+				'my-ul' : {
+					template : '<ul><slot></slot></ul>'
+				},
+				'my-li' : {
+					template : '<li>11111</li>'
+				}
+			}
+		});
+
+	</script>
+</body>
+</html>
