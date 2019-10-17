@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<my-header></my-header>
+		<my-list></my-list>
+	</div>
+
+	<script>
+
+		//创建一个空实例，为了传递数据
+		var bus = new Vue();
+
+		var vm = new Vue({
+			el : '#app',
+			components : {
+				'my-header' : {
+					template : '<h2>{{ title }}</h2>',
+					data(){
+						return {
+							title : '默认头'
+						}
+					},
+					//生命周期，整个页面初始渲染已结束，初始最后一位
+					mounted(){
+						//this.$on('customTitleEvents',()=>{});
+						bus.$on('customTitleEvents',(val)=>{
+							this.title = val;
+						});
+					}
+				},
+				'my-list' : {
+					template : `
+							<ul>
+								<li v-for="item in list" @click="handleChange">{{ item }}</li>
+							</ul>
+							`,
+					data(){
+						return {
+							list : [1111,2222,3333]
+						}
+					},
+					methods : {
+						handleChange(ev){
+							//console.log(ev.target.innerHTML);
+							bus.$emit( 'customTitleEvents' ,ev.target.innerHTML);
+						}
+					}
+				}
+			}
+		});
+
+	</script>
+</body>
+</html>
