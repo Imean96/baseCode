@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<!-- <my-header :message="parentMessage"></my-header> -->
+		<h2>{{ title }}</h2>
+		<ul>
+			<my-list @custom-title-events="handleTitleEvents"></my-list>
+		</ul>
+	</div>
+
+	<script>
+
+	//1、父组件向子组件通信：props参数,默认是不能直接通信的(因为耦合性太强了)
+	//2、数据是有作用域的，如果想传递必须通过props这样的方式，不能直接去调用祖先组件中的数据
+	//3、组件之间的数据传递，单向数据流目的：解耦代码 
+	//4、子组件向父组件通信：emit events 自定义事件
+	//5、vue中所有属性：都不能出现大写(不能用驼峰写法)，可以写成横线的形式
+
+	/*var vm = new Vue({
+		el : '#app',
+		data : {
+			parentMessage : '我是来自父组件的数据'
+		},
+		components : {
+			'my-header' : {	
+				template : '<div>{{ message }} , <my-title :meesage="message"></my-title></div>',
+				data(){
+					return {
+						
+					};
+				},
+				props : ['message'],
+				methods : {
+					
+				},
+				components : {
+					'my-title' : {
+						template : '<h2>我是一个标题,我是来自父组件的数据 {{ message }}</h2>',
+						props : ['message']
+					}
+				}
+			}
+		}
+	});*/
+
+	/*var vm = new Vue({
+		el : '#app',
+		data : {
+			parentMessage : '我是来自父组件的数据'
+		},
+		components : {
+			'my-header' : {	
+				template : '<div @click="change">{{ childMessage }}</div>',
+				data(){
+					return {
+						childMessage : this.message				
+					};
+				},
+				props : ['message'],
+				methods : {
+					change(){
+						this.childMessage = 'hello';
+					}
+				}
+			}
+		}
+	});*/
+
+	var vm = new Vue({
+		el : '#app',
+		data : {
+			title: '默认内容'
+		},
+		methods : {
+			handleTitleEvents(payload){
+				//console.log(payload);
+				this.title = payload;
+			}
+		},
+		components : {
+			'my-list' : {
+				template : `
+					<ul>
+						<li v-for="item in list" @click="handleChangeClick">{{ item }}</li>
+					</ul>
+				`,
+				data(){
+					return {
+						list : [1111,2222,3333]
+					}
+				},
+				methods : {
+					handleChangeClick(ev){
+						//console.log(ev.target.innerHTML);
+						//$emit()方法主动去调用自定义事件
+						this.$emit('custom-title-events',ev.target.innerHTML);
+
+					}
+				}
+			}
+		}
+	});
+
+
+
+	</script>
+</body>
+</html>
