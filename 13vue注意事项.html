@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div id="app" ref="app">
+		<table ref="tab">
+			<tbody ref="tb">
+				<!-- <my-tr></my-tr> -->
+				<tr is="my-tr"></tr>
+			</tbody>
+		</table>
+		<!-- <my-header @click="add"></my-header> -->	
+		<my-header ref="myHeader" @click.native="add"></my-header>
+	</div>
+
+	<script>
+
+	//key属性：
+	//is属性：可以让一个标签解析成对应的组件
+	//ref属性：
+		//1、这个属性如果添加到html标签上，表示可以获取都这个DOM节点
+		//2、这个属性如果添加到组件上，表示可以获取到这个组件	
+
+	//事件如果加到html标签上，事件是真实的事件click就是click
+	//事件加到组件上，会认为这个是一个自定义事件，就那么你写了click，也会认为是自定义事件
+	//如果你想让组件身上的自定义事件变成真正的事件，click.native
+
+	/*var vm = new Vue({
+		el : '#app',
+		data : {
+			title: '默认内容'
+		},
+		methods : {
+			add(){
+				console.log(123);
+			}
+		},
+		components : {
+			'my-tr' : {
+				template : '<tr><td>1111111</td></tr>'
+			},
+			'my-header' : {
+				template : '<div @click="childAdd">我是头部</div>',
+				methods : {
+					childAdd(){
+						this.$emit('click');
+					}
+				}
+			}
+		}
+	});*/
+
+	var vm = new Vue({
+		el : '#app',
+		data : {
+			title: '默认内容'
+		},
+		methods : {
+			add(){
+				//console.log(123);
+				//console.log( this.$refs.tb );
+				console.log( this.$refs.myHeader.$data );
+			}
+		},
+		components : {
+			'my-tr' : {
+				template : '<tr><td>1111111</td></tr>'
+			},
+			'my-header' : {
+				template : '<div>{{ message }}</div>',
+				data(){
+					return {
+						message : 'hello'
+					}		
+				}
+			}
+		}
+	});
+
+
+
+	</script>
+</body>
+</html>
