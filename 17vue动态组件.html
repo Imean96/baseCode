@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<!-- <my-tab1></my-tab1>	
+		<my-tab2></my-tab2>	
+		<my-tab3></my-tab3>	 -->
+		<button @click="handleChangeClick(1)">用户名</button>
+		<button @click="handleChangeClick(2)">邮箱</button>
+		<button @click="handleChangeClick(3)">密码</button>
+		<keep-alive>
+			<component :is="nowComponent"></component>	
+		</keep-alive>	
+	</div>
+
+	<script>
+
+		//1、组件模板必须只能有一个根节点
+		//2、component标签来实现动态组件，配合is属性
+		//3、v-once提升性能的，对静态的结构进行缓存
+		//4、keep-alive标签,进行缓存的
+			//当组件名字不一样的情况下，是没办法复合的，会重新进行渲染
+			//如何能够让组件缓存之前的操作，keep-alive标签可以做到
+		
+		var vm = new Vue({
+			el : '#app',
+			components : {
+				'my-tab1' : {
+					/*template : '<div><div>111</div><div>111</div></div>'*/
+					template : '<div>用户名：<input type="text" value="小明"></div>'
+				},
+				'my-tab2' : {
+					/*template : '<div><div>111</div><div>111</div></div>'*/
+					template : '<div>邮箱：<input type="text"></div>'
+				},
+				'my-tab3' : {
+					/*template : '<div><div>111</div><div>111</div></div>'*/
+					template : '<div>密码：<input type="text"></div>'
+				}
+			},
+			data : {
+				nowComponent : 'my-tab1'
+			},
+			methods : {
+				handleChangeClick(num){
+					this.nowComponent = 'my-tab' + num; 
+				}
+			}
+		});
+
+	</script>
+</body>
+</html>
