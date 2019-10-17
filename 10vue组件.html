@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<!-- <div id="app">
+		<my-header></my-header>	
+		<my-title></my-title>
+	</div>
+	<div id="app2">
+		<my-title></my-title>	
+	</div> -->
+	<!-- <div id="app">
+		<my-header></my-header>	
+		<my-header></my-header>	
+		<my-header></my-header>	
+	</div> -->
+	<div id="app">
+		<my-counter></my-counter>
+		<my-counter></my-counter>	
+	</div>
+	<script>
+		
+	//全局组件
+	//1、Vue.component()创建全局组件，第一个参数为组件的名字，第二个参数为配置对象
+	//2、template参数：组件要渲染的HTML模板
+	
+	/*Vue.component('my-header',{
+		template : '<div>我是头部组件</div>'
+	});
+
+	var vm = new Vue({
+		el : '#app'
+	});
+
+	var vm2 = new Vue({
+		el : '#app2'
+	});*/
+
+	//局部组件
+	//new Vue() : components参数来实现
+	//局部组件跟全局组件的区别：局部组件只能在指定的控制范围内生效
+
+	/*var vm = new Vue({
+		el : '#app',
+		components : {
+			'my-header' : {
+				template : '<div>我是一个局部的头部组件</div>'
+			},
+			'my-title' : {
+				template : '<h2>我是一个标题</h2>'
+			}
+		}
+	});
+
+	var vm2 = new Vue({
+		el : '#app2'
+	});*/
+
+	/*Vue()跟Vue.component()是一种继承关系
+		Vue() : 父类
+		Vue.component() : 子类
+			data
+			methods
+			computed
+			template
+			...*/
+
+	//组件中的data跟实例中的data是有区别的
+		//实例中的data ： {}  对象
+		//组件中的data ： fn  函数
+		//为什么不一样？ ： 
+		//组件是可以复用的，这样需要数据是独立的可复用的，不能是共享的
+	
+	/*var vm = new Vue({
+		el : '#app',
+		components : {
+			'my-header' : {
+				template : '<div>{{message}}</div>',
+				data(){
+					return {
+						message : 'hello component'
+					};
+				}
+			}
+		}
+	});*/
+
+	/*var data = {  //问题演示，数据共享了！
+		count : 0
+	}
+
+	var vm = new Vue({
+		el : '#app',
+		components : {
+			'my-counter' : {
+				template : '<div @click="handleChange">{{count}}</div>',
+				data(){
+					return data;
+				},
+				methods : {
+					handleChange(){
+						this.count++;
+					}
+				}
+			}
+		}
+	});
+*/
+
+
+
+	var vm = new Vue({
+		el : '#app',
+		components : {
+			'my-counter' : {
+				template : '<div @click="handleChange">{{count}}</div>',
+				data(){
+					return {
+						count : 0
+					};
+				},
+				methods : {
+					handleChange(){
+						this.count++;
+					}
+				}
+			}
+		}
+	});
+
+
+
+	</script>
+</body>
+</html>
