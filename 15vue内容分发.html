@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<my-header>
+			<!-- <h2 slot="left">我是一个内容</h2> -->
+			<h2 slot="right">我又是一个新的内容</h2>
+		</my-header>
+	</div>
+
+	<script>
+
+		//为了让组件可以组合，我们需要一种方式来混合父组件的内容与子组件自己的模板。这个过程称为内容分发
+		
+		//1、内容分发：用到<slot>插槽
+		//2、默认组件内的内容是不会分发的，需要用到<slot>才可以分发
+		//3、多插槽(<slot>)时候，需要给分发的内容添加指定的名字(name属性对应)
+		//4、<slot>默认值怎么用，name能找到显示存在的内容，不存在则显示默认值
+
+		var vm = new Vue({
+			el : '#app',
+			components : {
+				'my-header' : {
+					template : '<div><slot name="left"><h2>我是默认值</h2></slot>,{{ title }},<slot name="right"></slot></div>',
+					data(){
+						return {
+							title : '默认头'
+						}
+					}
+				}
+			}
+		});
+
+	</script>
+</body>
+</html>
